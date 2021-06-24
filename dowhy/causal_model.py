@@ -231,7 +231,10 @@ class CausalModel:
 
         """
         if effect_modifiers is None:
-            effect_modifiers = self._effect_modifiers
+            if self._effect_modifiers is None:
+                effect_modifiers = self.get_effect_modifiers()
+            else:
+                effect_modifiers = self._effect_modifiers
 
         if method_name is None:
             #TODO add propensity score as default backdoor method, iv as default iv method, add an informational message to show which method has been selected.
